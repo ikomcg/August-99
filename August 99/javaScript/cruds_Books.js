@@ -1,4 +1,4 @@
-// Add bookd
+// Add books
 $(document).ready(function(){
     $("#btn_add_books").click(function(){
       //console.log('click')
@@ -11,13 +11,11 @@ $(document).ready(function(){
       
       const xml = new XMLHttpRequest();
 
-   
         xml.onload = function(){
         
           const obj = JSON.parse(xml.responseText);  
 
           if(this.readyState == 4 && this.status == 200){
-     
             if(obj.dataStatus[0] == false){
               swal({
                 title: obj.message[0],
@@ -38,23 +36,18 @@ $(document).ready(function(){
                 window.location.href = 'index.php';
               } 
           })
-         
-          
             }
           }
         };
         xml.open('POST', 'CRUD/formSubmit.php')
         xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xml.send(`addBooks=addbooks&Title=${Title}&ISBN=${ISBN}&Author=${Author}&Publisher=${Publisher}&Year_Published=${Year_Published}&Category=${Category}`);
-
-
   });
 });
 
 //Update books
 $(document).ready(function(){
   $("#btn_update_books").click(function(){
-    //console.log('click')
     const books_ID = $("#inpt_ID").val();
     const Title = $("#inpt_Title").val();
     const ISBN =$("#inpt_ISBN").val();
@@ -64,20 +57,12 @@ $(document).ready(function(){
     const Category = $("#inpt_Category").val();
     const xml = new XMLHttpRequest();
 
-
       xml.onload = function(){
       
         const obj = JSON.parse(xml.responseText);  
 
         if(this.readyState == 4 && this.status == 200){
-         
-          if(obj.dataStatus[0] == false){
-            swal({
-              title: obj.message[0],
-              text: obj.message[1],
-              icon: obj.message[2]
-          })
-        }
+          
         if(obj.dataStatus[0] == true){
           swal({
             title: obj.message[0] ,
@@ -90,9 +75,7 @@ $(document).ready(function(){
             if (success) {
                 window.location.href = 'index.php';
             } 
-        })
-       
-        
+          })
           }
         }
       };
