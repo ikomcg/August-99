@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+body {
+  
+}
+div.add_book{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: end;
+}
+div.add_book button{
+    margin: 10px;
+    padding: 5px 20px;
+}
+table{
+    text-align: center;
+}
+table tbody td{
+    border: 1px solid rgb(194, 191, 191);
+    border-bottom: none;
+}
+table  tbody button a{
+    font-size: 12px !important;
+    color: #ffffffff !important;
+    text-decoration: none;
+}
+
+
+body div#add-books, body div#update-books{
+  
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+  
+
+    background-color: rgba(0, 0, 0, 0.8) !important;
+
+}
+body div#update-books{
+    display: flex;
+     height: 100vh;
+}
+body div#add-books{
+    display: none;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+body div#add-books .form, div#update-books .form{
+    background-color: #ffffffff;
+
+    width: 80%;
+
+    margin: 0 auto;
+    padding: 10px;
+
+    border-radius: 10px;
+}
