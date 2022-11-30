@@ -18,13 +18,11 @@
                 <td>'.$result['Category'].'</td>
                 <td>
                     <button type="button" class="btn btn-secondary btn-lg" >
-                      <a href=Edit_Del.php?ID='.$result['books_ID'].' >Edit</a>  
+                      <a href=Edit.php?ID='.$result['books_ID'].' >Edit</a>  
                     </button>
-                    <button type="button" class="btn btn-secondary btn-lg" > <a href='.$result['books_ID'].' >DEL</a></button>
+                    <button type="button" class="btn btn-secondary btn-lg" > <a href=CRUD/formSubmit.php?DelID='.$result['books_ID'].' >DEL</a></button>
                 </td>
             </tr>';
     }
 
     }
-
-?>
