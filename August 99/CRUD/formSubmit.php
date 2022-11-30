@@ -10,8 +10,8 @@ if (isset($_POST['update'])) {
     $Year_Published = $_POST['Year_Published'];
     $Category = $_POST['Category'];
 
-    $addBooks = new mySQL($Title, $ISBN, $Author, $Publisher, intval($Year_Published), $Category, $mysqli);
-    $addBooks->updateBooks($booksID);
+    $addBooks = new mySQL();
+    $addBooks->updateBooks($booksID, $Title, $ISBN, $Author, $Publisher, intval($Year_Published), $Category, $mysqli);
 
 } else if (isset($_POST['addBooks'])) {
     $Title = $_POST['Title'];
@@ -21,32 +21,15 @@ if (isset($_POST['update'])) {
     $Year_Published = $_POST['Year_Published'];
     $Category = $_POST['Category'];
 
-    $addBooks = new mySQL($Title, $ISBN, $Author, $Publisher, intval($Year_Published), $Category, $mysqli);
-    $addBooks->addBooks();
-}
+    $addBooks = new mySQL();
+    $addBooks->addBooks($Title, $ISBN, $Author, $Publisher, intval($Year_Published), $Category, $mysqli);
+} 
 
 
 class mySQL
 {
-    public $Title;
-    public $ISBN;
-    public $Author;
-    public $Publisher;
-    public $Year_Published;
-    public $Category;
-    public $booksID;
-
-    function __construct( $Title, $ISBN, $Author, $Publisher, $Year_Published, $Category, $mysqli)
-    {
-        $this->title = $Title;
-        $this->ISBN = $ISBN;
-        $this->Author = $Author;
-        $this->Publisher = $Publisher;
-        $this->Year_Published = $Year_Published;
-        $this->Category = $Category;
-        $this->mysqli =  $mysqli;
-    }
-   function addBooks()
+    
+   function addBooks($Title, $ISBN, $Author, $Publisher, $Year_Published, $Category, $mysqli)
     {
 
         $response = array();
@@ -54,7 +37,7 @@ class mySQL
 
 
         $sqlreg = "INSERT INTO bookscatalog(Title, ISBN, Author, Publisher, Year_Publisher, Category) 
-            VALUES ('$this->title','$this->ISBN',' $this->Author','$this->Publisher','$this->Year_Published','$this->Category')";
+            VALUES ('$Title','$ISBN',' $Author','$Publisher','$Year_Published','$Category')";
 
         $response[] = 'Success';
         $response[] = 'Add books success';
@@ -62,8 +45,8 @@ class mySQL
 
         $inserData[] = true;
 
-        if ($this->mysqli->query($sqlreg)) {
-            $this->mysqli->affected_rows;
+        if ($mysqli->query($sqlreg)) {
+            $mysqli->affected_rows;
         }
 
         echo json_encode(array(
@@ -71,14 +54,14 @@ class mySQL
             'dataStatus' => $inserData
         ));
     }
-    function updateBooks($booksID)
+    function updateBooks($booksID, $Title, $ISBN, $Author, $Publisher, $Year_Published, $Category, $mysqli)
     {
 
         $response = array();
         $inserData = array();
 
 
-        $sqlupd = "UPDATE bookscatalog SET Title='$this->title', ISBN='$this->ISBN', Author='$this->Author', Publisher='$this->Publisher', Year_Publisher='$this->Year_Published', Category='$this->Category' WHERE books_ID='$booksID'";
+        $sqlupd = "UPDATE bookscatalog SET Title= '$Title', ISBN= '$ISBN', Author= '$Author', Publisher= '$Publisher', Year_Publisher= '$Year_Published', Category= '$Category' WHERE books_ID='$booksID'";
 
 
         $response[] = 'Success';
@@ -87,8 +70,8 @@ class mySQL
 
         $inserData[] = true;
 
-        if ($this->mysqli->query($sqlupd)) {
-            $this->mysqli->affected_rows;
+        if ($mysqli->query($sqlupd)) {
+            $mysqli->affected_rows;
         }
 
         echo json_encode(array(
