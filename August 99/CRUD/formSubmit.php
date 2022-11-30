@@ -24,6 +24,12 @@ if (isset($_POST['update'])) {
     $addBooks = new mySQL();
     $addBooks->addBooks($Title, $ISBN, $Author, $Publisher, intval($Year_Published), $Category, $mysqli);
 } 
+else if (isset($_GET['DelID'])){
+    $booksID = $_GET['DelID'];
+    $addBooks = new mySQL();
+    $addBooks->Delete($booksID, $mysqli);
+    
+}
 
 
 class mySQL
@@ -78,5 +84,18 @@ class mySQL
             'message' => $response,
             'dataStatus' => $inserData
         ));
+    }
+    function Delete($booksID, $mysqli){
+
+
+
+        $sqlDEL = "DELETE FROM bookscatalog WHERE books_ID='$booksID'";
+
+
+
+        if ($mysqli->query($sqlDEL) == true) {
+            echo '<script>alert("Delete Success"); window.location = "../index.php"</script>';
+        }
+
     }
 }
