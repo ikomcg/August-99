@@ -11,13 +11,13 @@ $(document).ready(function(){
       
       const xml = new XMLHttpRequest();
 
-    //   $('#loading').css('display', 'flex')
+   
         xml.onload = function(){
         
           const obj = JSON.parse(xml.responseText);  
 
           if(this.readyState == 4 && this.status == 200){
-            // $('#loading').css('display', 'none')
+     
             if(obj.dataStatus[0] == false){
               swal({
                 title: obj.message[0],
@@ -64,13 +64,13 @@ $(document).ready(function(){
     const Category = $("#inpt_Category").val();
     const xml = new XMLHttpRequest();
 
-  //   $('#loading').css('display', 'flex')
+
       xml.onload = function(){
       
         const obj = JSON.parse(xml.responseText);  
 
         if(this.readyState == 4 && this.status == 200){
-          // $('#loading').css('display', 'none')
+         
           if(obj.dataStatus[0] == false){
             swal({
               title: obj.message[0],
@@ -99,51 +99,6 @@ $(document).ready(function(){
       xml.open('POST', 'CRUD/formSubmit.php')
       xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xml.send(`update=updates&booksID=${books_ID}&Title=${Title}&ISBN=${ISBN}&Author=${Author}&Publisher=${Publisher}&Year_Published=${Year_Published}&Category=${Category}`);
-
-
-});
-});
-//Update books
-$(document).ready(function(){
-  $("#btn_delete_books").click(function(){
-    //console.log('click')
-    const xml = new XMLHttpRequest();
-
-  //   $('#loading').css('display', 'flex')
-      xml.onload = function(){
-      
-        const obj = JSON.parse(xml.responseText);  
-
-        if(this.readyState == 4 && this.status == 200){
-          // $('#loading').css('display', 'none')
-          if(obj.dataStatus[0] == false){
-            swal({
-              title: obj.message[0],
-              text: obj.message[1],
-              icon: obj.message[2]
-          })
-        }
-        if(obj.dataStatus[0] == true){
-          swal({
-            title: obj.message[0] ,
-            text: obj.message[1],
-            icon: obj.message[2],
-            buttons: "OK",
-            dangerMode: true,
-          }).then((willDelete) => {
-            
-            if (willDelete) {
-                window.location.href = 'index.php';
-            } 
-        })
-       
-        
-          }
-        }
-      };
-      xml.open('POST', 'CRUD/formSubmit.php')
-      xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xml.send(`delete=delete`);
 
 
 });
