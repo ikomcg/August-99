@@ -85,9 +85,9 @@ $(document).ready(function(){
             icon: obj.message[2],
             buttons: "OK",
             dangerMode: true,
-          }).then((willDelete) => {
+          }).then((success) => {
             
-            if (willDelete) {
+            if (success) {
                 window.location.href = 'index.php';
             } 
         })
